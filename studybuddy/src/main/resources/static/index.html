@@ -1,113 +1,1795 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
     <title>StudyBuddy</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+            rel="stylesheet"
+            href="style.css">
+
 </head>
+
 
 <body>
 
-<h1>StudyBuddy</h1>
 
-<p>Student Study Group Formation Tool</p>
+<!-- =====================================================
+     LOGIN PAGE
+===================================================== -->
 
-<hr>
+<div
+        id="loginPage"
+        class="auth-page">
 
-<h2>Dashboard</h2>
+    <div class="auth-card">
 
-<div>
-    <h3>Students</h3>
-    <p id="studentCount">0</p>
+        <div class="auth-logo">
+
+            <div class="auth-logo-icon">
+                📚
+            </div>
+
+            <h1>StudyBuddy</h1>
+
+        </div>
+
+
+        <p class="auth-subtitle">
+            Student Study Group Formation Tool
+        </p>
+
+
+        <h2>
+            Welcome Back
+        </h2>
+
+        <p class="auth-description">
+            Login to continue to your StudyBuddy account.
+        </p>
+
+
+        <form
+                onsubmit="handleLogin(event)">
+
+            <div class="auth-input-group">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="Enter your email"
+                        required>
+
+            </div>
+
+
+            <div class="auth-input-group">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                        required>
+
+            </div>
+
+
+            <button
+                    type="submit"
+                    class="auth-btn">
+
+                Login
+
+            </button>
+
+        </form>
+
+
+        <p
+                id="loginMessage"
+                class="auth-message">
+        </p>
+
+
+        <div class="auth-switch">
+
+            Don't have an account?
+
+            <button
+                    type="button"
+                    onclick="showRegisterPage()">
+
+                Register
+
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
 
-<div>
-    <h3>Subjects</h3>
-    <p id="subjectCount">0</p>
+
+
+<!-- =====================================================
+     REGISTER PAGE
+===================================================== -->
+
+<div
+        id="registerPage"
+        class="auth-page hidden">
+
+    <div class="auth-card">
+
+        <div class="auth-logo">
+
+            <div class="auth-logo-icon">
+                📚
+            </div>
+
+            <h1>StudyBuddy</h1>
+
+        </div>
+
+
+        <p class="auth-subtitle">
+            Create your student account
+        </p>
+
+
+        <h2>
+            Create Account
+        </h2>
+
+        <p class="auth-description">
+            Register to start creating and joining study groups.
+        </p>
+
+
+        <form
+                onsubmit="handleRegister(event)">
+
+            <div class="auth-input-group">
+
+                <label>
+                    Name
+                </label>
+
+                <input
+                        type="text"
+                        id="registerName"
+                        placeholder="Enter your name"
+                        required>
+
+            </div>
+
+
+            <div class="auth-input-group">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="Enter your email"
+                        required>
+
+            </div>
+
+
+            <div class="auth-input-group">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                        type="password"
+                        id="registerPassword"
+                        placeholder="Create a password"
+                        required>
+
+            </div>
+
+
+            <div class="auth-input-group">
+
+                <label>
+                    Confirm Password
+                </label>
+
+                <input
+                        type="password"
+                        id="registerConfirmPassword"
+                        placeholder="Confirm your password"
+                        required>
+
+            </div>
+
+
+            <button
+                    type="submit"
+                    class="auth-btn">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+
+        <p
+                id="registerMessage"
+                class="auth-message">
+        </p>
+
+
+        <div class="auth-switch">
+
+            Already have an account?
+
+            <button
+                    type="button"
+                    onclick="showLoginPage()">
+
+                Login
+
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
 
-<div>
-    <h3>Study Groups</h3>
-    <p id="groupCount">0</p>
+
+
+<!-- =====================================================
+     MAIN APPLICATION
+===================================================== -->
+
+<div
+        id="mainApp"
+        class="app hidden">
+
+
+    <!-- ================= TOP BAR ================= -->
+
+    <header class="topbar">
+
+        <div class="logo">
+
+            <span class="logo-icon">
+                📚
+            </span>
+
+            <span>
+                StudyBuddy
+            </span>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="profile">
+
+                <div class="profile-dot"></div>
+
+                <span id="loggedInUser">
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= MAIN LAYOUT ================= -->
+
+    <div class="layout">
+
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+
+            <button
+                    class="nav-item active"
+                    onclick="showSection('dashboard', this)">
+
+                <span>
+                    ◉
+                </span>
+
+                Dashboard
+
+            </button>
+
+
+            <button
+                    class="nav-item"
+                    onclick="showSection('students', this)">
+
+                <span>
+                    ●
+                </span>
+
+                Students
+
+            </button>
+
+
+            <button
+                    class="nav-item"
+                    onclick="showSection('subjects', this)">
+
+                <span>
+                    ●
+                </span>
+
+                Subjects
+
+            </button>
+
+
+            <button
+                    class="nav-item"
+                    onclick="showSection('study-groups', this)">
+
+                <span>
+                    ●
+                </span>
+
+                Study Groups
+
+            </button>
+
+
+            <button
+                    class="nav-item"
+                    onclick="showSection('memberships', this)">
+
+                <span>
+                    ●
+                </span>
+
+                Memberships
+
+            </button>
+
+
+            <button
+                    class="nav-item logout-nav"
+                    onclick="logout()">
+
+                <span>
+                    ↪
+                </span>
+
+                Logout
+
+            </button>
+
+
+        </aside>
+
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <main class="content">
+
+
+            <!-- =================================================
+                 DASHBOARD
+            ================================================= -->
+
+            <section
+                    id="dashboard"
+                    class="page-section">
+
+
+                <div class="dashboard-header">
+
+                    <div>
+
+                        <h1>
+                            StudyBuddy Overview
+                        </h1>
+
+                        <p>
+                            Manage students, subjects, study groups
+                            and memberships from one place.
+                        </p>
+
+                    </div>
+
+
+                    <div class="dashboard-status">
+
+                        <span class="status-dot"></span>
+
+                        System Active
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STAT CARDS -->
+
+                <div class="stats-grid">
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon student-icon">
+                            👨‍🎓
+                        </div>
+
+                        <div class="stat-info">
+
+                            <div class="stat-title">
+                                Students
+                            </div>
+
+                            <div
+                                    id="studentCount"
+                                    class="stat-value">
+
+                                0
+
+                            </div>
+
+                            <span class="stat-description">
+                                Registered students
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon subject-icon">
+                            📚
+                        </div>
+
+                        <div class="stat-info">
+
+                            <div class="stat-title">
+                                Subjects
+                            </div>
+
+                            <div
+                                    id="subjectCount"
+                                    class="stat-value">
+
+                                0
+
+                            </div>
+
+                            <span class="stat-description">
+                                Available subjects
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon group-icon">
+                            👥
+                        </div>
+
+                        <div class="stat-info">
+
+                            <div class="stat-title">
+                                Study Groups
+                            </div>
+
+                            <div
+                                    id="groupCount"
+                                    class="stat-value">
+
+                                0
+
+                            </div>
+
+                            <span class="stat-description">
+                                Active study groups
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon member-icon">
+                            🔗
+                        </div>
+
+                        <div class="stat-info">
+
+                            <div class="stat-title">
+                                Memberships
+                            </div>
+
+                            <div
+                                    id="membershipCount"
+                                    class="stat-value">
+
+                                0
+
+                            </div>
+
+                            <span class="stat-description">
+                                Group connections
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- QUICK ACTIONS + SYSTEM INFO -->
+
+                <div class="dashboard-grid">
+
+
+                    <div class="dashboard-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <h2>
+                                    Quick Actions
+                                </h2>
+
+                                <p>
+                                    Quickly manage your StudyBuddy data.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="quick-actions">
+
+
+                            <button
+                                    class="quick-action"
+                                    onclick="showSection(
+                                        'students',
+                                        document.querySelectorAll('.nav-item')[1]
+                                    )">
+
+                                <div class="quick-icon">
+                                    👨‍🎓
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Add Student
+                                    </strong>
+
+                                    <span>
+                                        Register a new student
+                                    </span>
+
+                                </div>
+
+                            </button>
+
+
+
+                            <button
+                                    class="quick-action"
+                                    onclick="showSection(
+                                        'subjects',
+                                        document.querySelectorAll('.nav-item')[2]
+                                    )">
+
+                                <div class="quick-icon">
+                                    📖
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Add Subject
+                                    </strong>
+
+                                    <span>
+                                        Create a new subject
+                                    </span>
+
+                                </div>
+
+                            </button>
+
+
+
+                            <button
+                                    class="quick-action"
+                                    onclick="showSection(
+                                        'study-groups',
+                                        document.querySelectorAll('.nav-item')[3]
+                                    )">
+
+                                <div class="quick-icon">
+                                    👥
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Create Study Group
+                                    </strong>
+
+                                    <span>
+                                        Start a new study group
+                                    </span>
+
+                                </div>
+
+                            </button>
+
+
+
+                            <button
+                                    class="quick-action"
+                                    onclick="showSection(
+                                        'memberships',
+                                        document.querySelectorAll('.nav-item')[4]
+                                    )">
+
+                                <div class="quick-icon">
+                                    🔗
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Add Membership
+                                    </strong>
+
+                                    <span>
+                                        Connect a student to a group
+                                    </span>
+
+                                </div>
+
+                            </button>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="dashboard-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <h2>
+                                    StudyBuddy
+                                </h2>
+
+                                <p>
+                                    Your study group management system
+                                </p>
+
+                            </div>
+
+
+                            <span class="active-badge">
+                                Active
+                            </span>
+
+                        </div>
+
+
+                        <div class="activity-list">
+
+
+                            <div class="activity-item">
+
+                                <div class="activity-number">
+                                    01
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Manage Students
+                                    </strong>
+
+                                    <span>
+                                        Add, edit and remove students
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="activity-item">
+
+                                <div class="activity-number">
+                                    02
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Manage Subjects
+                                    </strong>
+
+                                    <span>
+                                        Organize subjects for study groups
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="activity-item">
+
+                                <div class="activity-number">
+                                    03
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Create Study Groups
+                                    </strong>
+
+                                    <span>
+                                        Form groups around subjects
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="activity-item">
+
+                                <div class="activity-number">
+                                    04
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Connect Members
+                                    </strong>
+
+                                    <span>
+                                        Add students to study groups
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="dashboard-info">
+
+                    <div class="info-content">
+
+                        <div class="info-icon">
+                            💡
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Build Better Study Groups
+                            </h3>
+
+                            <p>
+                                StudyBuddy helps students find and
+                                organize study groups based on their
+                                subjects and learning needs.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                            class="secondary-btn"
+                            onclick="showSection(
+                                'study-groups',
+                                document.querySelectorAll('.nav-item')[3]
+                            )">
+
+                        View Study Groups
+
+                    </button>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 STUDENTS
+            ================================================= -->
+
+            <section
+                    id="students"
+                    class="page-section hidden">
+
+
+                <div class="page-header">
+
+                    <div>
+
+                        <h1>
+                            Students
+                        </h1>
+
+                        <p>
+                            Manage students in StudyBuddy.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                            class="primary-btn"
+                            onclick="showStudentForm()">
+
+                        + Add Student
+
+                    </button>
+
+                </div>
+
+
+
+                <div
+                        id="studentForm"
+                        class="form-card hidden">
+
+                    <h3 id="studentFormTitle">
+                        Add Student
+                    </h3>
+
+
+                    <input
+                            type="hidden"
+                            id="studentId">
+
+
+                    <input
+                            type="text"
+                            id="studentName"
+                            placeholder="Student name">
+
+
+                    <input
+                            type="email"
+                            id="studentEmail"
+                            placeholder="Email">
+
+
+                    <input
+                            type="text"
+                            id="studentDepartment"
+                            placeholder="Department">
+
+
+                    <div class="form-actions">
+
+                        <button
+                                class="primary-btn"
+                                onclick="saveStudent()">
+
+                            Save
+
+                        </button>
+
+
+                        <button
+                                class="secondary-btn"
+                                onclick="hideStudentForm()">
+
+                            Cancel
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="search-box">
+
+                    <input
+                            type="text"
+                            id="studentSearch"
+                            placeholder="Search students..."
+                            onkeyup="filterStudents()">
+
+                </div>
+
+
+
+                <div class="data-card">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Name</th>
+
+                            <th>Department</th>
+
+                            <th>Email</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody id="studentTableBody">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SUBJECTS
+            ================================================= -->
+
+            <section
+                    id="subjects"
+                    class="page-section hidden">
+
+
+                <div class="page-header">
+
+                    <div>
+
+                        <h1>
+                            Subjects
+                        </h1>
+
+                        <p>
+                            Manage available subjects.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                            class="primary-btn"
+                            onclick="showSubjectForm()">
+
+                        + Add Subject
+
+                    </button>
+
+                </div>
+
+
+
+                <div
+                        id="subjectForm"
+                        class="form-card hidden">
+
+                    <h3 id="subjectFormTitle">
+                        Add Subject
+                    </h3>
+
+
+                    <input
+                            type="hidden"
+                            id="subjectId">
+
+
+                    <input
+                            type="text"
+                            id="subjectName"
+                            placeholder="Subject name">
+
+
+                    <input
+                            type="text"
+                            id="subjectCode"
+                            placeholder="Subject code">
+
+
+                    <div class="form-actions">
+
+                        <button
+                                class="primary-btn"
+                                onclick="saveSubject()">
+
+                            Save
+
+                        </button>
+
+
+                        <button
+                                class="secondary-btn"
+                                onclick="hideSubjectForm()">
+
+                            Cancel
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="search-box">
+
+                    <input
+                            type="text"
+                            id="subjectSearch"
+                            placeholder="Search subjects..."
+                            onkeyup="filterSubjects()">
+
+                </div>
+
+
+
+                <div class="data-card">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Subject Name</th>
+
+                            <th>Subject Code</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody id="subjectTableBody">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 STUDY GROUPS
+            ================================================= -->
+
+            <section
+                    id="study-groups"
+                    class="page-section hidden">
+
+
+                <div class="page-header">
+
+                    <div>
+
+                        <h1>
+                            Study Groups
+                        </h1>
+
+                        <p>
+                            Create and manage study groups.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                            class="primary-btn"
+                            onclick="showGroupForm()">
+
+                        + Add Group
+
+                    </button>
+
+                </div>
+
+
+
+                <div
+                        id="groupForm"
+                        class="form-card hidden">
+
+                    <h3 id="groupFormTitle">
+                        Add Study Group
+                    </h3>
+
+
+                    <input
+                            type="hidden"
+                            id="groupId">
+
+
+                    <input
+                            type="text"
+                            id="groupName"
+                            placeholder="Group name">
+
+
+                    <input
+                            type="number"
+                            id="maxMembers"
+                            placeholder="Maximum members">
+
+
+                    <input
+                            type="number"
+                            id="groupSubjectId"
+                            placeholder="Subject ID">
+
+
+                    <input
+                            type="number"
+                            id="groupOwnerId"
+                            placeholder="Owner Student ID">
+
+
+                    <div class="form-actions">
+
+                        <button
+                                class="primary-btn"
+                                onclick="saveGroup()">
+
+                            Save
+
+                        </button>
+
+
+                        <button
+                                class="secondary-btn"
+                                onclick="hideGroupForm()">
+
+                            Cancel
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="search-box">
+
+                    <input
+                            type="text"
+                            id="groupSearch"
+                            placeholder="Search study groups..."
+                            onkeyup="filterGroups()">
+
+                </div>
+
+
+
+                <div class="data-card">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Group Name</th>
+
+                            <th>Max Members</th>
+
+                            <th>Subject</th>
+
+                            <th>Owner</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody id="groupTableBody">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MEMBERSHIPS
+            ================================================= -->
+
+            <section
+                    id="memberships"
+                    class="page-section hidden">
+
+
+                <div class="page-header">
+
+                    <div>
+
+                        <h1>
+                            Memberships
+                        </h1>
+
+                        <p>
+                            Manage students joining study groups.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                            class="primary-btn"
+                            onclick="showMembershipForm()">
+
+                        + Add Membership
+
+                    </button>
+
+                </div>
+
+
+
+                <div
+                        id="membershipForm"
+                        class="form-card hidden">
+
+                    <h3 id="membershipFormTitle">
+                        Add Membership
+                    </h3>
+
+
+                    <input
+                            type="hidden"
+                            id="membershipId">
+
+
+                    <input
+                            type="number"
+                            id="membershipStudentId"
+                            placeholder="Student ID">
+
+
+                    <input
+                            type="number"
+                            id="membershipGroupId"
+                            placeholder="Study Group ID">
+
+
+                    <div class="form-actions">
+
+                        <button
+                                class="primary-btn"
+                                onclick="saveMembership()">
+
+                            Save
+
+                        </button>
+
+
+                        <button
+                                class="secondary-btn"
+                                onclick="hideMembershipForm()">
+
+                            Cancel
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="data-card">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Student</th>
+
+                            <th>Study Group</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody id="membershipTableBody">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+    </div>
+
 </div>
 
-<div>
-    <h3>Memberships</h3>
-    <p id="membershipCount">0</p>
-</div>
 
-<hr>
 
-<h2>Students</h2>
+<!-- =====================================================
+     AUTHENTICATION FUNCTIONS
+===================================================== -->
 
-<table border="1" cellpadding="10">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Department</th>
-    </tr>
-    </thead>
+<script>
 
-    <tbody id="studentTable">
-    </tbody>
-</table>
+    /* =====================================================
+       SHOW LOGIN PAGE
+    ===================================================== */
 
-<hr>
+    function showLoginPage() {
 
-<h2>Subjects</h2>
+        document
+            .getElementById("loginPage")
+            .classList.remove("hidden");
 
-<table border="1" cellpadding="10">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Subject Name</th>
-        <th>Subject Code</th>
-    </tr>
-    </thead>
+        document
+            .getElementById("registerPage")
+            .classList.add("hidden");
 
-    <tbody id="subjectTable">
-    </tbody>
-</table>
+        document
+            .getElementById("mainApp")
+            .classList.add("hidden");
 
-<hr>
+    }
 
-<h2>Study Groups</h2>
 
-<table border="1" cellpadding="10">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Group Name</th>
-        <th>Max Members</th>
-        <th>Subject</th>
-        <th>Owner</th>
-    </tr>
-    </thead>
+    /* =====================================================
+       SHOW REGISTER PAGE
+    ===================================================== */
 
-    <tbody id="groupTable">
-    </tbody>
-</table>
+    function showRegisterPage() {
 
-<hr>
+        document
+            .getElementById("loginPage")
+            .classList.add("hidden");
 
-<h2>Memberships</h2>
+        document
+            .getElementById("registerPage")
+            .classList.remove("hidden");
 
-<table border="1" cellpadding="10">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Student</th>
-        <th>Study Group</th>
-    </tr>
-    </thead>
+        document
+            .getElementById("mainApp")
+            .classList.add("hidden");
 
-    <tbody id="membershipTable">
-    </tbody>
-</table>
+    }
+
+
+    /* =====================================================
+       REGISTER USER
+    ===================================================== */
+
+    async function handleRegister(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document
+                .getElementById("registerName")
+                .value
+                .trim();
+
+
+        const email =
+            document
+                .getElementById("registerEmail")
+                .value
+                .trim();
+
+
+        const password =
+            document
+                .getElementById("registerPassword")
+                .value;
+
+
+        const confirmPassword =
+            document
+                .getElementById(
+                    "registerConfirmPassword"
+                )
+                .value;
+
+
+        const message =
+            document
+                .getElementById("registerMessage");
+
+
+        if (password !== confirmPassword) {
+
+            message.textContent =
+                "Passwords do not match.";
+
+            message.className =
+                "auth-message error";
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/users/register",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            name: name,
+
+                            email: email,
+
+                            password: password
+
+                        })
+
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Registration failed"
+                );
+
+            }
+
+
+            message.textContent =
+                "Account created successfully! Please login.";
+
+            message.className =
+                "auth-message success";
+
+
+            document
+                .getElementById("registerName")
+                .value = "";
+
+
+            document
+                .getElementById("registerEmail")
+                .value = "";
+
+
+            document
+                .getElementById("registerPassword")
+                .value = "";
+
+
+            document
+                .getElementById("registerConfirmPassword")
+                .value = "";
+
+
+            setTimeout(
+                function () {
+
+                    showLoginPage();
+
+                },
+                1200
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Registration error:",
+                error
+            );
+
+
+            message.textContent =
+                "Unable to register user.";
+
+            message.className =
+                "auth-message error";
+
+        }
+
+    }
+
+
+    /* =====================================================
+       LOGIN USER
+    ===================================================== */
+
+    async function handleLogin(event) {
+
+        event.preventDefault();
+
+
+        const email =
+            document
+                .getElementById("loginEmail")
+                .value
+                .trim();
+
+
+        const password =
+            document
+                .getElementById("loginPassword")
+                .value;
+
+
+        const message =
+            document
+                .getElementById("loginMessage");
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/users/login",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            email: email,
+
+                            password: password
+
+                        })
+
+                    }
+                );
+
+
+            const result =
+                await response.text();
+
+
+            if (result === "Login successful") {
+
+                message.textContent =
+                    "Login successful!";
+
+                message.className =
+                    "auth-message success";
+
+
+                document
+                    .getElementById("loggedInUser")
+                    .textContent = email;
+
+
+                document
+                    .getElementById("loginPage")
+                    .classList.add("hidden");
+
+
+                document
+                    .getElementById("registerPage")
+                    .classList.add("hidden");
+
+
+                document
+                    .getElementById("mainApp")
+                    .classList.remove("hidden");
+
+
+                /*
+                 * Load dashboard data after login
+                 */
+                if (typeof loadData === "function") {
+
+                    await loadData();
+
+                }
+
+
+            } else {
+
+                message.textContent =
+                    "Invalid email or password.";
+
+                message.className =
+                    "auth-message error";
+
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "Login error:",
+                error
+            );
+
+
+            message.textContent =
+                "Unable to connect to server.";
+
+            message.className =
+                "auth-message error";
+
+        }
+
+    }
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    function logout() {
+
+        document
+            .getElementById("mainApp")
+            .classList.add("hidden");
+
+
+        document
+            .getElementById("registerPage")
+            .classList.add("hidden");
+
+
+        document
+            .getElementById("loginPage")
+            .classList.remove("hidden");
+
+
+        document
+            .getElementById("loginEmail")
+            .value = "";
+
+
+        document
+            .getElementById("loginPassword")
+            .value = "";
+
+
+        document
+            .getElementById("loginMessage")
+            .textContent = "";
+
+    }
+
+</script>
+
+
+
+<!-- =====================================================
+     MAIN APPLICATION JAVASCRIPT
+===================================================== -->
+
 <script src="script.js"></script>
+
+
 </body>
+
 </html>
