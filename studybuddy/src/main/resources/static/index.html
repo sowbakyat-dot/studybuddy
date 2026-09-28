@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyBuddy</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>StudyBuddy</h1>
+
+<p>Student Study Group Formation Tool</p>
+
+<hr>
+
+<h2>Dashboard</h2>
+
+<div>
+    <h3>Students</h3>
+    <p id="studentCount">0</p>
+</div>
+
+<div>
+    <h3>Subjects</h3>
+    <p id="subjectCount">0</p>
+</div>
+
+<div>
+    <h3>Study Groups</h3>
+    <p id="groupCount">0</p>
+</div>
+
+<div>
+    <h3>Memberships</h3>
+    <p id="membershipCount">0</p>
+</div>
+
+<hr>
+
+<h2>Students</h2>
+
+<table border="1" cellpadding="10">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+    </tr>
+    </thead>
+
+    <tbody id="studentTable">
+    </tbody>
+</table>
+
+<hr>
+
+<h2>Subjects</h2>
+
+<table border="1" cellpadding="10">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Subject Name</th>
+        <th>Subject Code</th>
+    </tr>
+    </thead>
+
+    <tbody id="subjectTable">
+    </tbody>
+</table>
+
+<hr>
+
+<h2>Study Groups</h2>
+
+<table border="1" cellpadding="10">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Group Name</th>
+        <th>Max Members</th>
+        <th>Subject</th>
+        <th>Owner</th>
+    </tr>
+    </thead>
+
+    <tbody id="groupTable">
+    </tbody>
+</table>
+
+<hr>
+
+<h2>Memberships</h2>
+
+<table border="1" cellpadding="10">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Student</th>
+        <th>Study Group</th>
+    </tr>
+    </thead>
+
+    <tbody id="membershipTable">
+    </tbody>
+</table>
+<script src="script.js"></script>
+</body>
+</html>
